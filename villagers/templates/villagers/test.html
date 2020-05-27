@@ -1,0 +1,50 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+{% load villager_custom_template_tag %}
+{% block content %}
+{#    {{ request.GET }}#}
+{#    {% if request.GET.data %}<div>query: {{ request.GET.data }}</div>{% endif %}#}
+{#    <h2 id="data">{{ request.get_full_path }}</h2>#}
+{#    <h2 id="data">{{ request.path }}</h2>#}
+{#    <a href="{{ request.get_full_path }}?data=helo">a{{ request.path }}</a>#}
+{#    <a href="http://127.0.0.1:8000/?data=Raju+Babur+lives_in_village" title="Raju Babur lives_in_village">2</a>#}
+
+    <a href="?{% replace_query_parameter request 'param' 'value' %}">fasd</a>
+
+{% endblock %}
+
+        <h3> By lives_in_village </h3>
+            <ul>
+                {% if request.GET.lives_in_village %}
+                    <li>
+                        <a href="?{% remove_query_parameter 'lives_in_village' %}">All </a>
+                    </li>
+                {% else %}
+                    <li class="selected">
+                        <a href="{{ request.get_full_path }}">All </a>
+                    </li>
+                {% endif %}
+                {% for lives_in_village in lives_in_village_list %}
+                    {% if request.GET %}
+                        {% if request.GET.lives_in_village %}
+                            {% if request.GET.lives_in_village == lives_in_village.name %}
+                                <li class="selected">
+                                    <a href="{{ request.get_full_path }}">{{ lives_in_village.name }} </a>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <a href="?{% replace_query_parameter 'lives_in_village' lives_in_village.name %}">{{ lives_in_village.name }} </a>
+                                </li>
+                            {% endif %}
+                        {% else %}
+                            <li>
+                                <a href="{{ request.get_full_path }}&lives_in_village={{ lives_in_village.name }}" >{{ lives_in_village.name }} </a>
+                            </li>
+                        {% endif %}
+                    {% else %}
+                        <li>
+                            <a href="{{ request.get_full_path }}?lives_in_village={{ lives_in_village.name }}" >{{ lives_in_village.name }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>

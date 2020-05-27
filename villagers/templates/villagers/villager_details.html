@@ -1,0 +1,164 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+{% block title %} Detail Information {% endblock %}
+{% block content %}
+
+    <link href="{% static 'villagers/css/villager_details.css' %}" rel="stylesheet">
+
+    <table>
+        <caption >Detail Information</caption>
+{#        <thead>#}
+{#            <tr>#}
+{#                <th scope="col">Key</th>#}
+{#                <th scope="col">Data</th>#}
+{#            </tr>#}
+{#        </thead>#}
+        <tbody>
+            <tr>
+                <th>name</th>
+                <td data-label="NAME">
+                    <a href="{{ context.villager.get_absolute_url }}" >{{ context.villager.name }} </a>
+                </td>
+            </tr>
+            <tr>
+                <th>Father name</th>
+                <td data-label="FATHER name">
+                    {% if context.villager.father %}
+                        <a href="{{ context.villager.father.get_absolute_url }}" >{{ context.villager.father }}</a>
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>mother name</th>
+                <td data-label="FATHER name">
+                    {% if context.villager.mother %}
+                        <a href="{{ context.villager.mother.get_absolute_url }}" >{{ context.villager.mother }}</a>
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>grand Father name</th>
+                <td data-label="grand FATHER name">
+                    {% if context.villager.grand_father %}
+                        <a href="{{ context.villager.grand_father.get_absolute_url }}" >{{ context.villager.grand_father }}</a>
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>grand mother name</th>
+                <td data-label="grand FATHER name">
+                    {% if context.villager.grand_mother %}
+                        <a href="{{ context.villager.grand_mother.get_absolute_url }}" >{{ context.villager.grand_mother }}</a>
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+
+            {% if context.children %}
+                {% for child in context.children %}
+                    {% if forloop.first %}
+                        <tr>
+                            <th rowspan="{{ context.children | length }}">Children</th>
+                            <td data-label="Children">
+                                <a href="{{ child.get_absolute_url }}">{{ child.name }}</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td data-label="Children">
+                                <a href="{{ child.get_absolute_url }}">{{ child.name }}</a>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+
+            {% endif %}
+
+            <tr>
+                <th>bari</th>
+                <td data-label="bari">
+                    {% if context.villager.bari %}
+                       {{ context.villager.bari }}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+            {% if context.villager.highest_education %}
+            <tr>
+                <th>highest education</th>
+                <td data-label="highes education">
+                       {{ context.villager.highest_education }}
+                </td>
+            </tr>
+            {% endif %}
+            {% if context.villager.highest_education_institute %}
+            <tr>
+                <th>highest education institute</th>
+                <td data-label="highes education institute">
+                       {{ context.villager.highest_education_institute }}
+                </td>
+            </tr>
+            {% endif %}
+            <tr>
+                <th>occupation</th>
+                <td data-label="occupation">
+                    {% if context.villager.occupation %}
+                       {{ context.villager.occupation }}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>marital status</th>
+                <td data-label="marital_status">
+                    {{ context.villager.marital_status }}
+                </td>
+            </tr>
+            {% if context.villager.spouse %}
+            <tr>
+                <th>Spouse</th>
+                <td data-label="highes education">
+                    <a href="{{ context.villager.spouse.get_absolute_url }}">{{ context.villager.spouse }}</a>
+                </td>
+            </tr>
+            {% endif %}
+            <tr>
+                <th>Lives in Village</th>
+                <td data-level="lives in village">
+                    {{ context.villager.lives_in_village }}
+                </td>
+            </tr>
+            <tr>
+                <th>Alive</th>
+                <td data-level="Alive">
+                     {{ context.villager.alive }}
+                </td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+
+{% endblock %}

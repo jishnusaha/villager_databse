@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Villagers' List</title>
+    <link href="http://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet" type="text/css" />
+    <link href="{% static 'villagers/css/header.css' %}" rel="stylesheet">
+
+</head>
+<body>
+    <header class="header">
+        <a href="/" class="logo">Villagers</a>
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+        <ul class="menu">
+            <li><a href="#work">Login</a></li>
+        </ul>
+    </header>
+    q
+    <div style="margin-top:50px;">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
