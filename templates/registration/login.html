@@ -9,8 +9,8 @@
         <h1>Login</h1>
         <form method="post" >
             {% csrf_token %}
-                {{ form.username|as_crispy_field }}
-                {{ form.password|as_crispy_field }}
+                Username: {{ form.username }}
+                Password: {{ form.password }}
             <button type="submit">Log In</button>
         </form>
     </div>
