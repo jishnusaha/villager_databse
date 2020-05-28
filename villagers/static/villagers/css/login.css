@@ -16,6 +16,7 @@ input {
 
     background: rgb(232,240,254);
 }
+
 button[type=button], button[type=submit], input[type=reset] {
     background-color: #4CAF50;
     border: none;
