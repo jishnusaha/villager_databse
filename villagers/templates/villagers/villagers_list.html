@@ -44,7 +44,7 @@
                 {% endfor %}
             </ul>
 
-        <h3> By lives_in_village </h3>
+        <h3> By lives in village </h3>
             <ul>
                 {% if request.GET.lives_in_village %}
                     <li>
@@ -124,11 +124,7 @@
                     {% endif %}
                 </td>
                 <td data-label="LIVES IN VILLAGE">
-                    {% if villager.lives_in_village %}
-                        YES
-                    {% else %}
-                        NO
-                    {% endif %}
+                    {{ villager.lives_in_village }}
                 </td>
             </tr>
 
