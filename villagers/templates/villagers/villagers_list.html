@@ -138,7 +138,7 @@
 
 
     {% if villager_list.has_other_pages %}
-        <div class="pagination">
+        <div class="paginate">
             {% if villager_list.has_previous %}
                 <a href="?{% replace_query_parameter 'page' villager_list.previous_page_number  %}">&laquo;</a>
 {#                <a href="{{ request.get_full_path }}?page={{ villager_list.previous_page_number }}">&laquo;</a>#}

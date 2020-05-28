@@ -2,12 +2,6 @@
 {% load static %}
 {% load villager_custom_template_tag %}
 {% block content %}
-{#    {{ request.GET }}#}
-{#    {% if request.GET.data %}<div>query: {{ request.GET.data }}</div>{% endif %}#}
-{#    <h2 id="data">{{ request.get_full_path }}</h2>#}
-{#    <h2 id="data">{{ request.path }}</h2>#}
-{#    <a href="{{ request.get_full_path }}?data=helo">a{{ request.path }}</a>#}
-{#    <a href="http://127.0.0.1:8000/?data=Raju+Babur+lives_in_village" title="Raju Babur lives_in_village">2</a>#}
 
     <a href="?{% replace_query_parameter 'param' 'value' %}">fasd</a>
 

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Villagers' List</title>
+{#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" >#}
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet" type="text/css" />
     <link href="{% static 'villagers/css/header.css' %}" rel="stylesheet">
 
@@ -15,7 +16,12 @@
         <input class="menu-btn" type="checkbox" id="menu-btn" />
         <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
         <ul class="menu">
-            <li><a href="#work">Login</a></li>
+            {% if request.user.is_authenticated %}
+                <li><a href="{% url 'logout' %}?next={{ request.get_full_path }}">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}?next={{ request.get_full_path }}">Login</a></li>
+            {% endif %}
+
         </ul>
     </header>
     q
