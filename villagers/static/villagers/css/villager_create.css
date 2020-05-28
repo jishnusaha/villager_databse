@@ -1,0 +1,62 @@
+.form-box {
+    /*border: 2px solid red;*/
+    width: 80%;
+    margin: auto auto 5% auto;
+    border: 1px solid #ccc;
+    /*z-index: 5;*/
+    padding: 5% 5% 5% 5%;
+    /*text-align: center;*/
+
+}
+.form-box button {
+    text-align: center;
+    position: relative;
+}
+.help-block{
+    text-align: right;
+    margin-top: 0;
+}
+option {
+    font-weight: normal;
+    display: block;
+    white-space: pre;
+    min-height: 1.2em;
+    padding: 0 2px 1px;
+}
+input {
+    width: 100%;
+    padding: 12px 0;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #b6d5f6;
+    border-radius: 4px;
+    /*text-align: center;*/
+    background: rgb(232,240,254);
+}
+select {
+    width: 100%;
+    padding: 12px 0;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #b6d5f6;
+    border-radius: 4px;
+    text-align: center;
+    background: rgb(232,240,254);
+}
+
+
+button[type=button], button[type=submit], input[type=reset] {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.danger {
+    color: red;
+}
+.hidden {
+    display: none;
+}

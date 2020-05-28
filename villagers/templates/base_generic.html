@@ -1,4 +1,5 @@
 {% load static %}
+{% load villager_custom_template_tag %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,9 +18,20 @@
         <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
         <ul class="menu">
             {% if request.user.is_authenticated %}
-                <li><a href="{% url 'logout' %}?next={{ request.get_full_path }}">Logout</a></li>
+{#                <li><a href="{% url 'logout' %}?next={{ request.get_full_path }}">Logout</a></li>#}
+                <li><a href="{% url 'villager-create' %}">Add Villager</a> </li>
+                <li><a href="{% url 'logout' %}">Logout</a> </li>
+
+
             {% else %}
-                <li><a href="{% url 'login' %}?next={{ request.get_full_path }}">Login</a></li>
+                {% if request.GET %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+{##}
+{#                    <li><a href="{% url 'login' %}?next=/?{% prepare_login_url  %}" >Login</a></li>#}
+{#                    <li><a href="{% url 'login' %}?next={{ request.GET.urlencode }}">Login</a></li>#}
+                {% else %}
+                    <li><a href="{% url 'login' %}" >Login</a></li>
+                {% endif %}
             {% endif %}
 
         </ul>

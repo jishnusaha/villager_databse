@@ -1,8 +1,9 @@
 .login-box {
-    /*border: 2px solid red;*/
+    border: 1px solid #ccc;
     width: 60%;
     margin: auto;
     text-align: center;
+    padding: 0 5% 5% 5%;
 }
 
 input {
@@ -26,4 +27,10 @@ button[type=button], button[type=submit], input[type=reset] {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 4px;
+}
+.danger {
+    color: red;
+}
+.hidden {
+    display: none;
 }

@@ -7,8 +7,31 @@ from django.urls import reverse
 class Villager(models.Model):
 
     # personal information
-    name = models.CharField(max_length=50, blank=False, null=False, help_text="গ্রামের বাইরের লোক যুক্ত করবেন না")
+    name = models.CharField(max_length=50, blank=False, null=False)
+    sex_option = (
+        (None, ''),
+        ('Male', 'Male'),
+        ('Female', 'Female'),
+    )
+
+    sex = models.CharField(
+        max_length=10,
+        choices=sex_option,
+        blank=False,
+        default='',
+        help_text='লিঙ্গ',
+    )
     bari = models.ForeignKey('Bari', on_delete=models.SET_DEFAULT, default=None)
+    # family information
+    father = models.ForeignKey('self', on_delete=models.SET_DEFAULT, default=None, blank=True, null=True,
+                               related_name='father_name')
+    mother = models.ForeignKey('self', on_delete=models.SET_DEFAULT, default=None, blank=True, null=True,
+                               related_name="mother_name")
+    grand_father = models.ForeignKey('self', on_delete=models.SET_DEFAULT, default=None, blank=True, null=True,
+                                     related_name='grand_father_name')
+    grand_mother = models.ForeignKey('self', on_delete=models.SET_DEFAULT, default=None, blank=True, null=True,
+                                     related_name="grand_mother_name")
+
     highest_education = models.CharField(max_length=20, blank=True, null=True)
     highest_education_institute = models.CharField(max_length=100, blank=True, null=True)
     occupation = models.CharField(max_length=100, blank=True, null=True, help_text='পেশা')
@@ -24,19 +47,8 @@ class Villager(models.Model):
         default='',
         help_text='বিবাহিত',
     )
-    sex_option = (
-        (None, ''),
-        ('Male', 'Male'),
-        ('Female', 'Female'),
-    )
+    spouse = models.ForeignKey('self', on_delete=models.SET_DEFAULT, default=None, blank=True, null=True)
 
-    sex = models.CharField(
-        max_length=10,
-        choices=sex_option,
-        blank=False,
-        default='',
-        help_text='লিঙ্গ',
-    )
     lives_in_villager_option = (
         (None, ''),
         ('Yes', 'Yes'),
@@ -62,12 +74,6 @@ class Villager(models.Model):
         help_text='জীবিত আছেন?',
     )
 
-    # family information
-    father = models.ForeignKey('self', on_delete=models.SET_DEFAULT, default=None, blank=True, null=True, help_text='গ্রামের হলে যুক্ত করুন', related_name='father_name')
-    mother = models.ForeignKey('self', on_delete=models.SET_DEFAULT, default=None, blank=True, null=True, help_text='গ্রামের হলে যুক্ত করুন', related_name="mother_name")
-    grand_father = models.ForeignKey('self', on_delete=models.SET_DEFAULT, default=None, blank=True, null=True, help_text='গ্রামের হলে যুক্ত করুন', related_name='grand_father_name')
-    grand_mother = models.ForeignKey('self', on_delete=models.SET_DEFAULT, default=None, blank=True, null=True, help_text='গ্রামের হলে যুক্ত করুন', related_name="grand_mother_name")
-    spouse = models.ForeignKey('self', on_delete=models.SET_DEFAULT, default=None, blank=True, null=True, help_text='গ্রামের হলে যুক্ত করুন')
 
     def __str__(self):
         return self.name
