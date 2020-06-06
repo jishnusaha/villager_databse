@@ -17,14 +17,14 @@
             <tr>
                 <th>name</th>
                 <td data-label="NAME">
-                    <a href="{{ context.villager.get_absolute_url }}" >{{ context.villager.name }} </a>
+                    <a href="{{ villager.get_absolute_url }}" >{{ villager.name }} </a>
                 </td>
             </tr>
             <tr>
                 <th>Father name</th>
                 <td data-label="FATHER name">
-                    {% if context.villager.father %}
-                        <a href="{{ context.villager.father.get_absolute_url }}" >{{ context.villager.father }}</a>
+                    {% if villager.father %}
+                        <a href="{{ villager.father.get_absolute_url }}" >{{ villager.father }}</a>
                     {% else %}
                         -
                     {% endif %}
@@ -33,8 +33,8 @@
             <tr>
                 <th>mother name</th>
                 <td data-label="FATHER name">
-                    {% if context.villager.mother %}
-                        <a href="{{ context.villager.mother.get_absolute_url }}" >{{ context.villager.mother }}</a>
+                    {% if villager.mother %}
+                        <a href="{{ villager.mother.get_absolute_url }}" >{{ villager.mother }}</a>
                     {% else %}
                         -
                     {% endif %}
@@ -43,8 +43,8 @@
             <tr>
                 <th>grand Father name</th>
                 <td data-label="grand FATHER name">
-                    {% if context.villager.grand_father %}
-                        <a href="{{ context.villager.grand_father.get_absolute_url }}" >{{ context.villager.grand_father }}</a>
+                    {% if villager.grand_father %}
+                        <a href="{{ villager.grand_father.get_absolute_url }}" >{{ villager.grand_father }}</a>
                     {% else %}
                         -
                     {% endif %}
@@ -53,19 +53,19 @@
             <tr>
                 <th>grand mother name</th>
                 <td data-label="grand FATHER name">
-                    {% if context.villager.grand_mother %}
-                        <a href="{{ context.villager.grand_mother.get_absolute_url }}" >{{ context.villager.grand_mother }}</a>
+                    {% if villager.grand_mother %}
+                        <a href="{{ villager.grand_mother.get_absolute_url }}" >{{ villager.grand_mother }}</a>
                     {% else %}
                         -
                     {% endif %}
                 </td>
             </tr>
 
-            {% if context.children %}
-                {% for child in context.children %}
+            {% if children %}
+                {% for child in children %}
                     {% if forloop.first %}
                         <tr>
-                            <th rowspan="{{ context.children | length }}">Children</th>
+                            <th rowspan="{{ children | length }}">Children</th>
                             <td data-label="Children">
                                 <a href="{{ child.get_absolute_url }}">{{ child.name }}</a>
                             </td>
@@ -84,34 +84,34 @@
             <tr>
                 <th>bari</th>
                 <td data-label="bari">
-                    {% if context.villager.bari %}
-                       {{ context.villager.bari }}
+                    {% if villager.bari %}
+                       {{ villager.bari }}
                     {% else %}
                         -
                     {% endif %}
                 </td>
             </tr>
-            {% if context.villager.highest_education %}
+            {% if villager.highest_education %}
             <tr>
                 <th>highest education</th>
                 <td data-label="highes education">
-                       {{ context.villager.highest_education }}
+                       {{ villager.highest_education }}
                 </td>
             </tr>
             {% endif %}
-            {% if context.villager.highest_education_institute %}
+            {% if villager.highest_education_institute %}
             <tr>
                 <th>highest education institute</th>
                 <td data-label="highes education institute">
-                       {{ context.villager.highest_education_institute }}
+                       {{ villager.highest_education_institute }}
                 </td>
             </tr>
             {% endif %}
             <tr>
                 <th>occupation</th>
                 <td data-label="occupation">
-                    {% if context.villager.occupation %}
-                       {{ context.villager.occupation }}
+                    {% if villager.occupation %}
+                       {{ villager.occupation }}
                     {% else %}
                         -
                     {% endif %}
@@ -120,30 +120,31 @@
             <tr>
                 <th>marital status</th>
                 <td data-label="marital_status">
-                    {{ context.villager.marital_status }}
+                    {{ villager.marital_status }}
                 </td>
             </tr>
-            {% if context.villager.spouse %}
+            {% if villager.spouse %}
             <tr>
                 <th>Spouse</th>
                 <td data-label="highes education">
-                    <a href="{{ context.villager.spouse.get_absolute_url }}">{{ context.villager.spouse }}</a>
+                    <a href="{{ villager.spouse.get_absolute_url }}">{{ villager.spouse }}</a>
                 </td>
             </tr>
             {% endif %}
             <tr>
                 <th>Lives in Village</th>
                 <td data-level="lives in village">
-                    {{ context.villager.lives_in_village }}
+                    {{ villager.lives_in_village }}
                 </td>
             </tr>
             <tr>
                 <th>Alive</th>
                 <td data-level="Alive">
-                     {{ context.villager.alive }}
+                     {{ villager.alive }}
                 </td>
             </tr>
         </tbody>
     </table>
+    <button onclick="window.location.href = '{% url 'villager-edit' villager.id %}'" >Edit</button>
 
 {% endblock %}

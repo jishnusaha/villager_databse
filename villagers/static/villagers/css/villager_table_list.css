@@ -11,6 +11,7 @@ table {
   padding: 0;
   width: 74%;
   table-layout: fixed;
+  /*margin-top: 2%;*/
 
 }
 
@@ -38,11 +39,34 @@ table th {
   font-size: .85em;
   letter-spacing: .1em;
   text-transform: uppercase;
-}
+  position: sticky;
+  top: 60px;
+  /*top: inherit;*/
+  background-color: #f8f8f8;
 
-@media screen and (max-width: 820px) {
+
+}
+/*@media screen and (max-width: 850px) {*/
+/*    table {*/
+/*        margin: 400px 0 0 0;*/
+/*        border: 2px solid red;*/
+/*        width: 100%;*/
+/*    }*/
+/*    #filter {*/
+/*      display: none;*/
+/*    }*/
+/*}*/
+
+
+
+
+
+
+@media screen and (max-width: 900px) {
   table {
     border: 0;
+    /*margin-top: 50px;*/
+
   }
 
   table caption {
@@ -50,7 +74,8 @@ table th {
   }
 
   table thead {
-    border: none;
+    /*border: none;*/
+    /*border: 1px solid #ddd;*/
     clip: rect(0 0 0 0);
     height: 1px;
     margin: -1px;
@@ -59,6 +84,7 @@ table th {
     position: absolute;
     width: 1px;
   }
+
 
   table tr {
     border-bottom: 3px solid #ddd;

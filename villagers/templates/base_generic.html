@@ -6,9 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Villagers' List</title>
-{#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" >#}
     <link href="http://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet" type="text/css" />
     <link href="{% static 'villagers/css/header.css' %}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
 <body>
@@ -20,6 +20,7 @@
             {% if request.user.is_authenticated %}
 {#                <li><a href="{% url 'logout' %}?next={{ request.get_full_path }}">Logout</a></li>#}
                 <li><a href="{% url 'villager-create' %}">Add Villager</a> </li>
+                <li><a href="{% url 'bari-create' %}">Add Bari</a> </li>
                 <li><a href="{% url 'logout' %}">Logout</a> </li>
 
 
@@ -36,9 +37,11 @@
 
         </ul>
     </header>
-    q
-    <div style="margin-top:50px;">
+    <div style="margin-top: 65px;">
         {% block content %}{% endblock %}
     </div>
+
+
+
 </body>
 </html>

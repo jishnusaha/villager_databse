@@ -1,4 +1,4 @@
-.login-box {
+.bari-box {
     border: 1px solid #ccc;
     width: 60%;
     margin: auto;
@@ -38,4 +38,12 @@ button[type=button], button[type=submit], input[type=reset] {
 }
 .hidden {
     display: none;
+}
+[id^="error"] {
+    color: red;
+}
+
+.success {
+    color: green;
+    /*font-weight: bold;*/
 }

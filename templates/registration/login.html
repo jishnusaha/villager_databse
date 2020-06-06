@@ -1,5 +1,7 @@
 {% extends 'base_generic.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_field %}
 {% block content %}
     <link href="{% static 'villagers/css/login.css' %}" rel="stylesheet">
 
@@ -7,13 +9,13 @@
         <h1>Login</h1>
         <form method="post" >
             {% csrf_token %}
-                Username: {{ form.username }}
-                Password: {{ form.password }}
+                {{ form.username | as_crispy_field }}
+                {{ form.password | as_crispy_field }}
 
         {% if form.errors %}
+
             <p class="danger"> Invalid login</p>
         {% else %}
-            <p  class="hidden"> Invalid login</p>
             <br/>
             <br/>
         {% endif %}

@@ -1,5 +1,5 @@
 from django import template
-from urllib.parse import urlencode, quote
+# from urllib.parse import urlencode, quote
 register = template.Library()
 
 from time import sleep
@@ -10,14 +10,19 @@ def replace_query_parameter(context, field, value):
     # print("f: ", field, "v: ", value)
     dict_ = context['request'].GET.copy()
     dict_[field] = value
-    return urlencode(dict_, quote_via=quote)
+    # print(dict_.urlencode())
+    return dict_.urlencode()
+    # return urlencode(dict_, quote_via=quote)
 
 
 @register.simple_tag(takes_context=True)
 def remove_query_parameter(context, field):
+    # print("in remove")
     dict_ = context['request'].GET.copy()
     del dict_[field]
-    return urlencode(dict_, quote_via=quote)
+    # print(dict_.urlencode())
+    return dict_.urlencode()
+    # return urlencode(dict_, quote_via=quote)
 
 
 # @register.simple_tag(takes_context=True)

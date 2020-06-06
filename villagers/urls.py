@@ -3,9 +3,14 @@ from .views import *
 
 urlpatterns = [
     path('', index, name='villagers-list'),
+    # path('get/', get_villager, name='get-villager'),
+    path('get/', VillagerListView.as_view(), name='get-villager'),
     path('test/', test, name='test'),
-    # path('create/', Create.as_view(), name='villager-create'),
-    path('create/', create, name = 'villager-create'),
+    path('add-villager/', create_villager, name='villager-create'),
+    path('<int:pk>/add-more-information/', add_more_information_villager, name='villager-add-more-info'),
+    path('<int:pk>/edit/', update_villager, name='villager-edit'),
+    path('add-bari/', create_bari, name='bari-create'),
+
     path('<int:pk>/', detail, name='villager-details')
 
 ]

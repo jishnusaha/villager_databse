@@ -2,87 +2,98 @@
 {% load static %}
 {% load villager_custom_template_tag %}
 {% block content %}
-    <link href="{% static 'villagers/css/filter.css' %}" rel="stylesheet">
+    <link href="{% static 'villagers/css/option.css' %}" rel="stylesheet">
     <link href="{% static 'villagers/css/villager_table_list.css' %}" rel="stylesheet">
     <link href="{% static 'villagers/css/pagination.css' %}" rel="stylesheet">
-
-    <div class="filter">
-        <h2>Filter</h2>
-        <h3> By Bari </h3>
-            <ul>
-                {% if request.GET.bari %}
-                    <li>
-                        <a href="?{% remove_query_parameter 'bari' %}">All </a>
-                    </li>
-                {% else %}
-                    <li class="selected">
-                        <a href="{{ request.get_full_path }}">All </a>
-                    </li>
-                {% endif %}
-                {% for bari in bari_list %}
-                    {% if request.GET %}
+    <div >
+    <div class="option">
+        <div id="search">
+            <h2>Search</h2>
+            <h3>Name: <input type="text" id="name_search" placeholder="enter name to search..."></h3>
+        </div>
+        <div id="filter">
+            <div id="filter_bari">
+                <h2>Filter</h2>
+                <h3> By Bari </h3>
+                    <ul>
                         {% if request.GET.bari %}
-                            {% if request.GET.bari == bari.name %}
-                                <li class="selected">
-                                    <a href="{{ request.get_full_path }}">{{ bari.name }} </a>
-                                </li>
-                            {% else %}
-                                <li>
-                                    <a href="?{% replace_query_parameter 'bari' bari.name %}">{{ bari.name }} </a>
-                                </li>
-                            {% endif %}
-                        {% else %}
                             <li>
-                                <a href="{{ request.get_full_path }}&bari={{ bari.name }}" >{{ bari.name }} </a>
+                                <a href="?{% remove_query_parameter 'bari' %}">All </a>
+                            </li>
+                        {% else %}
+                            <li class="selected">
+                                <a href="{{ request.get_full_path }}">All </a>
                             </li>
                         {% endif %}
-                    {% else %}
+                        {% for bari in bari_list %}
+                            {% if request.GET %}
+                                {% if request.GET.bari %}
+                                    {% if request.GET.bari == bari.name %}
+                                        <li class="selected">
+                                            <a href="{{ request.get_full_path }}">{{ bari.name }} </a>
+                                        </li>
+                                    {% else %}
+                                        <li>
+                                            <a href="?{% replace_query_parameter 'bari' bari.name %}">{{ bari.name }} </a>
+                                        </li>
+                                    {% endif %}
+                                {% else %}
+                                    <li>
+                                        <a href="?{% replace_query_parameter 'bari' bari.name %}">{{ bari.name }}</a>
+{#                                        <a href="{{ request.get_full_path }}&bari={{ bari.name }}" >{{ bari.name }} </a>#}
+                                    </li>
+                                {% endif %}
+                            {% else %}
+                                <li>
+                                    <a href="?{% replace_query_parameter 'bari' bari.name %}">{{ bari.name }}</a>
+{#                                    <a href="{{ request.get_full_path }}?bari={{ bari.name }}" >{{ bari.name }}</a>#}
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+            </div>
+            <div id="filter_lives_in_village">
+            <h3> By lives in village </h3>
+                <ul>
+                    {% if request.GET.lives_in_village %}
                         <li>
-                            <a href="{{ request.get_full_path }}?bari={{ bari.name }}" >{{ bari.name }}</a>
+                            <a href="?{% remove_query_parameter 'lives_in_village' %}">All </a>
+                        </li>
+                    {% else %}
+                        <li class="selected">
+                            <a href="{{ request.get_full_path }}">All </a>
                         </li>
                     {% endif %}
-                {% endfor %}
-            </ul>
-
-        <h3> By lives in village </h3>
-            <ul>
-                {% if request.GET.lives_in_village %}
-                    <li>
-                        <a href="?{% remove_query_parameter 'lives_in_village' %}">All </a>
-                    </li>
-                {% else %}
-                    <li class="selected">
-                        <a href="{{ request.get_full_path }}">All </a>
-                    </li>
-                {% endif %}
-                {% for lives_in_village in lives_in_village_list %}
-{#                    {{ lives_in_village }}#}
-                    {% if request.GET %}
-                        {% if request.GET.lives_in_village %}
-                            {% if request.GET.lives_in_village == lives_in_village.lives_in_village %}
-                                <li class="selected">
-                                    <a href="{{ request.get_full_path }}">{{ lives_in_village.lives_in_village }} </a>
-                                </li>
+                    {% for lives_in_village in lives_in_village_list %}
+                        {% if request.GET %}
+                            {% if request.GET.lives_in_village %}
+                                {% if request.GET.lives_in_village == lives_in_village.lives_in_village %}
+                                    <li class="selected">
+                                        <a href="?{% replace_query_parameter 'lives_in_village' lives_in_village.lives_in_village %}">{{ lives_in_village.lives_in_village }} </a>
+{#                                        <a href="{{ request.get_full_path }}">{{ lives_in_village.lives_in_village }} </a>#}
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <a href="?{% replace_query_parameter 'lives_in_village' lives_in_village.lives_in_village %}">{{ lives_in_village.lives_in_village }} </a>
+                                    </li>
+                                {% endif %}
                             {% else %}
                                 <li>
                                     <a href="?{% replace_query_parameter 'lives_in_village' lives_in_village.lives_in_village %}">{{ lives_in_village.lives_in_village }} </a>
+{#                                    <a href="{{ request.get_full_path }}&lives_in_village={{ lives_in_village.lives_in_village }}" >{{ lives_in_village.lives_in_village }} </a>#}
                                 </li>
                             {% endif %}
                         {% else %}
                             <li>
-                                <a href="{{ request.get_full_path }}&lives_in_village={{ lives_in_village.lives_in_village }}" >{{ lives_in_village.lives_in_village }} </a>
+                                <a href="?{% replace_query_parameter 'lives_in_village' lives_in_village.lives_in_village %}">{{ lives_in_village.lives_in_village }} </a>
+{#                                <a href="{{ request.get_full_path }}?lives_in_village={{ lives_in_village.lives_in_village }}" >{{ lives_in_village.lives_in_village }}</a>#}
                             </li>
                         {% endif %}
-                    {% else %}
-                        <li>
-                            <a href="{{ request.get_full_path }}?lives_in_village={{ lives_in_village.lives_in_village }}" >{{ lives_in_village.lives_in_village }}</a>
-                        </li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-
+                    {% endfor %}
+                </ul>
+        </div>
+        </div>
     </div>
-
     <table>
 {#        <caption >Statement Summary</caption>#}
         <thead>
@@ -95,7 +106,7 @@
           <th scope="col">LIVES IN VILLAGE</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="tbody">
         {% for villager in villager_list %}
             <tr>
                 <td data-label="NAME">
@@ -117,7 +128,7 @@
                     {% endif %}
                 </td>
                 <td data-label="OCCUPATION">
-                    {% if villager.occupation in none %}
+                    {% if villager.occupation  %}
                         {{ villager.occupation }}
                     {% else %}
                         -
@@ -129,15 +140,15 @@
             </tr>
 
         {% endfor %}
+
         </tbody>
     </table>
-
+    </div>
 
     {% if villager_list.has_other_pages %}
         <div class="paginate">
             {% if villager_list.has_previous %}
                 <a href="?{% replace_query_parameter 'page' villager_list.previous_page_number  %}">&laquo;</a>
-{#                <a href="{{ request.get_full_path }}?page={{ villager_list.previous_page_number }}">&laquo;</a>#}
             {% else %}
                 <a class="inactive"><span>&laquo;</span></a>
             {% endif %}
@@ -146,17 +157,86 @@
                     <a class="active"><span>{{ i }}</span></a>
                 {% else %}
                     <a href="?{% replace_query_parameter 'page' i  %}">{{ i }}</a>
-{#                    <a href="{{ request.get_full_path }}?page={{ i }}">{{ i }}</a>#}
                 {% endif %}
             {% endfor %}
 
             {% if villager_list.has_next %}
                 <a href="?{% replace_query_parameter 'page' villager_list.next_page_number  %}">&laquo;</a>
-{#                <a href="{{ request.get_full_path }}?page={{ villager_list.next_page_number }}">&raquo;</a>#}
             {% else %}
                 <a class="inactive"><span>&raquo;</span></a>
             {% endif %}
         </div>
     {% endif %}
+
+    <script>
+        $(document).ready(function(){
+
+            let query_params = window.location.search;
+
+
+            $('#name_search').keyup(function () {
+                const name = this.value;
+                let query_params = window.location.search;
+                let query_params_list = query_params.substr(1, query_params.length).split('&');
+                let data = {};
+                query_params_list.forEach(function (val,key) {
+                    if (val){
+                        val = val.split('=');
+                        data[val[0]] = val[1].split('+').join(' ');
+                    }
+                });
+                data['name'] = name;
+
+                $('.paginate').html('');
+                $.ajax({
+                    type: "GET",
+                    url: "{% url 'get-villager' %}", // name of url
+                    data : data,
+                    success: function (response) {
+                        let data = "";
+                        console.log(response['results']);
+                        response['results'].forEach(function (villager) {
+                            let id = villager.id;
+                            data +='<tr>';
+                                data +='<td data-label="NAME">';
+                                    data += '<a href="'+villager.absolute_url+'">'+villager.name +'</a>';
+                                data +='</td>';
+                                data +='<td data-label="BARI">'+villager.bari_name +'</td>';
+                                data +='<td data-label="FATHER">';
+                                if(villager.father_name){
+                                    data += '<a href="'+villager.father_absolute_url+'">'+villager.father_name +'</a>';
+                                }else{
+                                    data += '-';
+                                }
+                                data += '</td>';
+                                data +='<td data-label="MOTHER">';
+                                if(villager.mother_name){
+                                    data += '<a href="'+villager.mother_absolute_url+'">'+villager.mother_name +'</a>';
+                                }else{
+                                    data += '-';
+                                }
+                                data += '</td>';
+                                data +='<td data-label="OCCUPATION">';
+                                if(villager.occupation){
+                                    data += villager.occupation;
+                                }else{
+                                    data += '-';
+                                }
+                                data += '</td>';
+                                data += '<td data-label="LIVES IN VILLAGE">'+ villager.lives_in_village + '</td>';
+                            data +='</tr>';
+                        });
+                        $('tbody').html(data);
+                    },
+                    error: function () {
+                        alert('error loading data');
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}
+
+
+
 

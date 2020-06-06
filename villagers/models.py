@@ -7,7 +7,7 @@ from django.urls import reverse
 class Villager(models.Model):
 
     # personal information
-    name = models.CharField(max_length=50, blank=False, null=False)
+    name = models.CharField(max_length=50, blank=False, null=False, help_text='নাম')
     sex_option = (
         (None, ''),
         ('Male', 'Male'),
@@ -21,7 +21,7 @@ class Villager(models.Model):
         default='',
         help_text='লিঙ্গ',
     )
-    bari = models.ForeignKey('Bari', on_delete=models.SET_DEFAULT, default=None)
+    bari = models.ForeignKey('Bari', on_delete=models.SET_DEFAULT, default=None, help_text='বাড়ির নাম')
     # family information
     father = models.ForeignKey('self', on_delete=models.SET_DEFAULT, default=None, blank=True, null=True,
                                related_name='father_name')
@@ -45,7 +45,7 @@ class Villager(models.Model):
         choices=marital_status_option,
         blank=False,
         default='',
-        help_text='বিবাহিত',
+        help_text='বৈবাহিক অবস্থা',
     )
     spouse = models.ForeignKey('self', on_delete=models.SET_DEFAULT, default=None, blank=True, null=True)
 
@@ -82,9 +82,19 @@ class Villager(models.Model):
         """Returns the url to access a detail record for this villager."""
         return reverse('villager-details', args=[str(self.id)])
 
+    # def get_father_absolute_url(self):
+    #     """Returns the url to access a detail record for this villager's father."""
+    #     return reverse('villager-details', args=[str(self.father.id)])
+    #
+    # def get_mother_absolute_url(self):
+    #     """Returns the url to access a detail record for this villager's mother."""
+    #     return reverse('villager-details', args=[str(self.mother.id)])
+
+
+
 
 class Bari(models.Model):
-    name = models.CharField(max_length=50, null=False)
+    name = models.CharField(max_length=50, null=False, unique=True)
 
     def __str__(self):
         return self.name

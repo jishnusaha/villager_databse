@@ -1,0 +1,28 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+{% load villager_custom_template_tag %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_field %}
+{% block content %}
+    <link href="{% static 'villagers/css/villager_create.css' %}" rel="stylesheet">
+    <h1 style="text-align: center">Add More Informations</h1>
+    <div class="form-box">
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.name | as_crispy_field }}
+            {{ form.father | as_crispy_field }}
+            {{ form.mother | as_crispy_field }}
+            {{ form.grand_father | as_crispy_field }}
+            {{ form.grand_mother | as_crispy_field }}
+
+            {{ form.highest_education | as_crispy_field}}
+            {{ form.highest_education_institute | as_crispy_field}}
+            {{ form.occupation | as_crispy_field}}
+            {{ form.spouse | as_crispy_field}}
+
+            <button type="submit" name="Save">Save</button>
+        </form>
+    </div>
+
+{% endblock %}

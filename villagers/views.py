@@ -1,17 +1,27 @@
+import json
+
 from django.forms import ModelForm
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views.generic import CreateView
+from rest_framework import status
+from rest_framework.generics import ListAPIView
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.response import Response
+
 from .models import Villager, Bari
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .serializer import VillagerSerializer
+from pprint import pprint
 
 
 def index(request):
     bari = request.GET.get('bari')
     lives_in_village = request.GET.get('lives_in_village')
-
-    villager_list = Villager.objects.all()
+    # print('bari: ', bari)
+    # print('lives_in_village: ', lives_in_village)
+    villager_list = Villager.objects.all().order_by('id')
     if bari:
         villager_list = villager_list.filter(bari__name=bari)
     if lives_in_village:
@@ -19,7 +29,7 @@ def index(request):
 
     page = request.GET.get('page', 1)
 
-    paginator = Paginator(villager_list, 3)
+    paginator = Paginator(villager_list, 15)
     try:
         villagers = paginator.page(page)
     except PageNotAnInteger:
@@ -38,6 +48,37 @@ def index(request):
     return render(request, 'villagers/villagers_list.html', context=context)
 
 
+class VillagerListView(ListAPIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = VillagerSerializer
+
+    def get_queryset(self):
+        print("in villagerlistview")
+        name = self.request.query_params.get('name', None)
+        bari = self.request.query_params.get('bari', None)
+        lives_in_village = self.request.query_params.get('lives_in_village', None)
+        print('name: ', name)
+        print('bari: ', bari)
+        print('lives_in_village: ', lives_in_village)
+        queryset = Villager.objects.all().order_by('id')
+
+        if name:
+            queryset = queryset.filter(name__icontains=name)
+        # else:
+        #     print("no filter by name")
+        if bari:
+            queryset = queryset.filter(bari__name=bari)
+        # else:
+        #     print("no filter by bari")
+        if lives_in_village:
+            queryset = queryset.filter(lives_in_village=lives_in_village)
+        # else:
+        #     print("no filter by lives_in_village")
+
+        # print(queryset)
+        return queryset
+
+
 def detail(request, pk):
     villager = get_object_or_404(Villager, pk=pk)
     if villager.sex == 'Male':
@@ -49,7 +90,7 @@ def detail(request, pk):
         'villager': villager,
         'children': children,
     }
-    return render(request, 'villagers/villager_details.html', context={'context': context})
+    return render(request, 'villagers/villager_details.html', context=context)
 
 
 def test(request):
@@ -59,52 +100,21 @@ def test(request):
 class VillagerCreateForm(ModelForm):
     class Meta:
         model = Villager
-        fields = '__all__'
+        fields = ['name', 'sex', 'bari', 'marital_status', 'lives_in_village', 'alive']
 
 
-def create(request):
+def create_villager(request):
     if request.method == 'POST':
         form = VillagerCreateForm(request.POST)
         # Check if the form is valid:
         if form.is_valid():
-            # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
-            villager = Villager()
-            villager.name = form.cleaned_data['name']
-            villager.sex = form.cleaned_data['sex']
-            villager.bari = form.cleaned_data['bari']
-            villager.marital_status = form.cleaned_data['marital_status']
-            villager.lives_in_village = form.cleaned_data['lives_in_village']
-            villager.alive = form.cleaned_data['alive']
+            instance = form.save()
+            if request.POST.get("Save"):
+                # redirect to a Details URL:
+                return HttpResponseRedirect(reverse('villager-details', kwargs={'pk': instance.id}))
+            else:
+                return HttpResponseRedirect(reverse('villager-add-more-info', kwargs={'pk': instance.id}))
 
-            try:
-                villager.father = form.cleaned_data['father']
-            except:
-                pass
-            try:
-                villager.mother = form.cleaned_data['mother']
-            except:
-                pass
-            try:
-                villager.grand_father = form.cleaned_data['grand_father']
-            except:
-                pass
-            try:
-                villager.highest_education = form.cleaned_data['highest_education']
-            except:
-                pass
-            try:
-                villager.highest_education_institute = form.cleaned_data['highest_education_institute']
-            except:
-                pass
-            try:
-                villager.occupation = form.cleaned_data['occupation']
-            except:
-                pass
-            # saving data
-            villager.save()
-
-            # redirect to a new URL:
-            return HttpResponseRedirect(reverse('villager-details', kwargs={'pk': villager.id}))
 
     else:
         form = VillagerCreateForm()
@@ -114,4 +124,70 @@ def create(request):
     }
     return render(request, 'villagers/villager_create.html', context=context)
 
+
+def update_villager(request, pk):
+    instance = get_object_or_404(Villager, pk=pk)
+    form = VillagerCreateForm(request.POST or None, instance=instance)
+    if form.is_valid():
+        form.save()
+        if request.POST.get("Save"):
+            # redirect to a Details URL:
+            return HttpResponseRedirect(reverse('villager-details', kwargs={'pk': instance.id}))
+        else:
+            return HttpResponseRedirect(reverse('villager-add-more-info', kwargs={'pk': instance.id}))
+
+    return render(request, 'villagers/villager_create.html', context={'form': form})
+
+
+class VillagerAddMoreInfoForm(ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['name'].disabled = True
+
+    class Meta:
+        model = Villager
+        fields = ['name', 'father', 'mother', 'grand_father', 'grand_mother', 'highest_education',
+                  'highest_education_institute', 'occupation', 'spouse']
+
+
+def add_more_information_villager(request, pk):
+    instance = get_object_or_404(Villager, pk=pk)
+    form = VillagerAddMoreInfoForm(request.POST or None, instance=instance)
+
+    object = Villager.objects.exclude(id=instance.id).filter(bari=instance.bari)
+
+    form.fields['father'].queryset = object.filter(sex='Male')
+    form.fields['mother'].queryset = object.filter(sex='Female')
+    form.fields['grand_father'].queryset = object.filter(sex='Male')
+    form.fields['grand_father'].queryset = object.filter(sex='Female')
+    if instance.marital_status == 'Unmarried':
+        form.fields['spouse'].disabled = True
+
+    # print(form)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('villager-details', kwargs={'pk': pk}))
+    return render(request, 'villagers/villager_add_more_info.html', {'form': form})
+
+
+class BariCreateForm(ModelForm):
+    class Meta:
+        model = Bari
+        fields = '__all__'
+
+
+def create_bari(request):
+    context = {}
+    if request.method == "POST":
+        form = BariCreateForm(request.POST)
+        if form.is_valid():
+            instance = form.save()
+            context['done'] = f"{instance.name} Added Successfully"
+            form = BariCreateForm()
+    else:
+        form = BariCreateForm()
+
+    context['form'] = form
+    return render(request, 'villagers/bari_create.html', context=context)
 
