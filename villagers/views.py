@@ -1,5 +1,6 @@
 import json
 
+from django.contrib.auth.decorators import login_required
 from django.forms import ModelForm
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
@@ -103,6 +104,7 @@ class VillagerCreateForm(ModelForm):
         fields = ['name', 'sex', 'bari', 'marital_status', 'lives_in_village', 'alive']
 
 
+@login_required
 def create_villager(request):
     if request.method == 'POST':
         form = VillagerCreateForm(request.POST)
@@ -125,6 +127,7 @@ def create_villager(request):
     return render(request, 'villagers/villager_create.html', context=context)
 
 
+@login_required
 def update_villager(request, pk):
     instance = get_object_or_404(Villager, pk=pk)
     form = VillagerCreateForm(request.POST or None, instance=instance)
@@ -151,6 +154,7 @@ class VillagerAddMoreInfoForm(ModelForm):
                   'highest_education_institute', 'occupation', 'spouse']
 
 
+@login_required
 def add_more_information_villager(request, pk):
     instance = get_object_or_404(Villager, pk=pk)
     form = VillagerAddMoreInfoForm(request.POST or None, instance=instance)
@@ -163,6 +167,11 @@ def add_more_information_villager(request, pk):
     form.fields['grand_father'].queryset = object.filter(sex='Female')
     if instance.marital_status == 'Unmarried':
         form.fields['spouse'].disabled = True
+    else:
+        if instance.sex == 'Male':
+            form.fields['spouse'].queryset = object.filter(sex='Female')
+        else:
+            form.fields['spouse'].queryset = object.filter(sex='Male')
 
     # print(form)
     if form.is_valid():
@@ -177,6 +186,7 @@ class BariCreateForm(ModelForm):
         fields = '__all__'
 
 
+@login_required
 def create_bari(request):
     context = {}
     if request.method == "POST":

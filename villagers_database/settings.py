@@ -76,23 +76,23 @@ WSGI_APPLICATION = 'villagers_database.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-#
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'd9t2dn1bih2t4t',
-#         'USER': 'sgelbxqcbvgwll',
-#         'PASSWORD': '253155ace78d537ba9c78aa3b5642eebe5aa8dc1ff349a868e3d99c2fc21a152',
-#         'HOST': 'ec2-3-91-139-25.compute-1.amazonaws.com',
-#         'PORT': '5432',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd8thj2dpc26b07',
+        'USER': 'egxdfgohgyyyju',
+        'PASSWORD': 'd40347d503b380db8306512c81b6fdee19ad0d87b55e381c468632ad30881b88',
+        'HOST': 'ec2-52-204-232-46.compute-1.amazonaws.com',
+        'PORT': '5432',
+    }
+}
 
 
 
@@ -120,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Dhaka'
 
 USE_I18N = True
 

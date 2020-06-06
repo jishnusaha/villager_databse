@@ -21,18 +21,18 @@
 {#                <li><a href="{% url 'logout' %}?next={{ request.get_full_path }}">Logout</a></li>#}
                 <li><a href="{% url 'villager-create' %}">Add Villager</a> </li>
                 <li><a href="{% url 'bari-create' %}">Add Bari</a> </li>
-                <li><a href="{% url 'logout' %}">Logout</a> </li>
-
+                <li><a href="{% url 'logout' %}?next={{request.path}}">Logout</a></li>
 
             {% else %}
-                {% if request.GET %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'login' %}?next={{request.path}}">Login</a></li>
+{#                {% if request.GET %}#}
+{#                    <li><a href="{% url 'login' %}">Login</a></li>#}
 {##}
 {#                    <li><a href="{% url 'login' %}?next=/?{% prepare_login_url  %}" >Login</a></li>#}
 {#                    <li><a href="{% url 'login' %}?next={{ request.GET.urlencode }}">Login</a></li>#}
-                {% else %}
-                    <li><a href="{% url 'login' %}" >Login</a></li>
-                {% endif %}
+{#                {% else %}#}
+{#                    <li><a href="{% url 'login' %}" >Login</a></li>#}
+{#                {% endif %}#}
             {% endif %}
 
         </ul>

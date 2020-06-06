@@ -145,6 +145,10 @@
             </tr>
         </tbody>
     </table>
-    <button onclick="window.location.href = '{% url 'villager-edit' villager.id %}'" >Edit</button>
+
+    {% if request.user.is_authenticated %}
+        <button onclick="window.location.href = '{% url 'villager-edit' villager.id %}'" >Edit</button>
+    {% endif %}
+
 
 {% endblock %}
