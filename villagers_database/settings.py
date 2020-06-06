@@ -86,10 +86,10 @@ WSGI_APPLICATION = 'villagers_database.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd8thj2dpc26b07',
-        'USER': 'egxdfgohgyyyju',
-        'PASSWORD': 'd40347d503b380db8306512c81b6fdee19ad0d87b55e381c468632ad30881b88',
-        'HOST': 'ec2-52-204-232-46.compute-1.amazonaws.com',
+        'NAME': 'de5hj54tre3848',
+        'USER': 'ghdxxmkzhynpsg',
+        'PASSWORD': '8b28722b4c040b59d419ef4786c9708e6c893658ccfa1087c986faeef9b4419c',
+        'HOST': 'ec2-34-194-198-176.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }

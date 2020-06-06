@@ -54,13 +54,13 @@ class VillagerListView(ListAPIView):
     serializer_class = VillagerSerializer
 
     def get_queryset(self):
-        print("in villagerlistview")
+        # print("in villagerlistview")
         name = self.request.query_params.get('name', None)
         bari = self.request.query_params.get('bari', None)
         lives_in_village = self.request.query_params.get('lives_in_village', None)
-        print('name: ', name)
-        print('bari: ', bari)
-        print('lives_in_village: ', lives_in_village)
+        # print('name: ', name)
+        # print('bari: ', bari)
+        # print('lives_in_village: ', lives_in_village)
         queryset = Villager.objects.all().order_by('id')
 
         if name:
