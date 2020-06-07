@@ -47,7 +47,7 @@ class Villager(models.Model):
         default='',
         help_text='বৈবাহিক অবস্থা',
     )
-    spouse = models.ForeignKey('self', on_delete=models.SET_DEFAULT, default=None, blank=True, null=True)
+    spouse = models.ForeignKey('self', on_delete=models.SET_DEFAULT, default=None, blank=True, null=True, help_text='স্বামী/স্ত্রী')
 
     lives_in_villager_option = (
         (None, ''),
@@ -74,7 +74,6 @@ class Villager(models.Model):
         help_text='জীবিত আছেন?',
     )
 
-
     def __str__(self):
         return self.name
 
@@ -89,8 +88,6 @@ class Villager(models.Model):
     # def get_mother_absolute_url(self):
     #     """Returns the url to access a detail record for this villager's mother."""
     #     return reverse('villager-details', args=[str(self.mother.id)])
-
-
 
 
 class Bari(models.Model):

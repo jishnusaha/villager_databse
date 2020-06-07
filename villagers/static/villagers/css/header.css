@@ -158,6 +158,11 @@ a {
 }
 /* 48em = 768px */
 
+.center{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
 @media (min-width: 48em) {
     .section-split a {
         width: 50%;

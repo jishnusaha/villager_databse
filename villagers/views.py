@@ -135,8 +135,10 @@ def update_villager(request, pk):
         form.save()
         if request.POST.get("Save"):
             # redirect to a Details URL:
+            print("redirect to details")
             return HttpResponseRedirect(reverse('villager-details', kwargs={'pk': instance.id}))
         else:
+            print("redirect to add more")
             return HttpResponseRedirect(reverse('villager-add-more-info', kwargs={'pk': instance.id}))
 
     return render(request, 'villagers/villager_create.html', context={'form': form})
@@ -175,9 +177,17 @@ def add_more_information_villager(request, pk):
 
     # print(form)
     if form.is_valid():
-        form.save()
+        instance = form.save()
+        if instance.spouse:
+            spouse = instance.spouse
+            spouse.spouse = instance
+            spouse.marital_status = instance.marital_status
+            spouse.save()
+        else:
+            print("no spouse")
+
         return HttpResponseRedirect(reverse('villager-details', kwargs={'pk': pk}))
-    return render(request, 'villagers/villager_add_more_info.html', {'form': form})
+    return render(request, 'villagers/villager_add_more_info.html', {'form': form, 'id': pk})
 
 
 class BariCreateForm(ModelForm):

@@ -1,34 +1,26 @@
-{% extends 'base_generic.html' %}
+<{% extends 'base_generic.html' %}
 {% load static %}
 {% load villager_custom_template_tag %}
 {% block content %}
-    <link href="{% static 'villagers/css/option.css' %}" rel="stylesheet">
+    <style>
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            margin: 10px;
+            padding: 16px 32px;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 4px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
 
-    <div class="option">
-        <div id="search">
-            <h2>Search</h2>
-            <h3>Name: <input type="text" id="name_search" placeholder="enter name to search..."></h3>
-        </div>
-        <div id="filter">
-            <div id="filter_bari">
-                <h2>Filter</h2>
-                <h3> By Color </h3>
-                    <ul>
-                        <li><a href="#">red</a></li>
-                        <li><a href="#">yellow</a></li>
-                        <li><a href="#">blue</a></li>
-                    </ul>
-            </div>
-            <div id="filter_lives_in_village">
-            <h3> By size </h3>
-                <ul>
-                    <li><a href="#">medium</a></li>
-                    <li><a href="#">large</a></li>
-                    <li><a href="#">small</a></li>
-                </ul>
-            </div>
-        </div>
+    </style>
+    <div class="center">
+    <button> afda</button>
+    <button> afdaa</button>
+    <button> afdaad</button>
     </div>
-
 {% endblock %}
-

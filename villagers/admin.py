@@ -10,7 +10,6 @@ admin.site.register(Bari)
 
 
 # admin.site.register(Villager)
-
 @admin.register(Villager)
 class VillagerAdmin(admin.ModelAdmin):
     list_display = ('name', 'bari', 'father', 'mother', 'occupation', 'marital_status', 'lives_in_village', 'alive')

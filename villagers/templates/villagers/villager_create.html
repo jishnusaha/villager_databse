@@ -13,21 +13,16 @@
             {{ form.name | as_crispy_field }}
             {{ form.sex | as_crispy_field }}
             {{ form.bari | as_crispy_field }}
-{#            {{ form.father | as_crispy_field }}#}
-{#            {{ form.mother | as_crispy_field }}#}
-{#            {{ form.grand_father | as_crispy_field }}#}
-{#            {{ form.grand_mother | as_crispy_field }}#}
-{##}
-{#            {{ form.highest_education | as_crispy_field}}#}
-{#            {{ form.highest_education_institute | as_crispy_field}}#}
-{#            {{ form.occupation | as_crispy_field}}#}
             {{ form.marital_status | as_crispy_field}}
-{#            {{ form.spouse | as_crispy_field}}#}
             {{ form.lives_in_village | as_crispy_field}}
             {{ form.alive | as_crispy_field}}
+            <div class="center">
+                <button type="submit" value="Save" name="Save">Save</button>
+            </div>
+            <div class="center">
+                <button type="submit" value="add_more" name="Add More">Add More Information</button>
+            </div>
 
-            <button type="submit" name="Save">Save</button>
-            <button type="submit" name="Add More">Add More Information</button>
         </form>
     </div>
 

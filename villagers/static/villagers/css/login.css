@@ -33,7 +33,7 @@ button[type=button], button[type=submit], input[type=reset] {
     cursor: pointer;
     border-radius: 4px;
 }
-.danger {
+.asteriskField {
     color: red;
 }
 .hidden {

@@ -147,7 +147,9 @@
     </table>
 
     {% if request.user.is_authenticated %}
-        <button onclick="window.location.href = '{% url 'villager-edit' villager.id %}'" >Edit</button>
+        <div class="center">
+            <button onclick="window.location.href = '{% url 'villager-edit' villager.id %}'" >Edit</button>
+        </div>
     {% endif %}
 
 

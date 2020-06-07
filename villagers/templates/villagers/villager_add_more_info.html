@@ -20,9 +20,14 @@
             {{ form.highest_education_institute | as_crispy_field}}
             {{ form.occupation | as_crispy_field}}
             {{ form.spouse | as_crispy_field}}
-
-            <button type="submit" name="Save">Save</button>
+            <div class="center">
+                <button type="submit" value="Save" name="Save">Save</button>
+            </div>
         </form>
+        <div class="center">
+            <button onclick="window.location.href = '{% url 'villager-edit' id %}'" >Edit Basic Info</button>
+        </div>
+
     </div>
 
 {% endblock %}

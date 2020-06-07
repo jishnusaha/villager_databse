@@ -1,11 +1,8 @@
 .form-box {
-    /*border: 2px solid red;*/
     width: 80%;
     margin: auto auto 5% auto;
     border: 1px solid #ccc;
-    /*z-index: 5;*/
     padding: 5% 5% 5% 5%;
-    /*text-align: center;*/
 
 }
 .form-box button {
@@ -95,16 +92,18 @@ select option {
 /*    color: #fff;*/
 /*    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);*/
 /*}*/
-button[type=button], button[type=submit], input[type=reset], input[type=submit] {
+button {
     background-color: #4CAF50;
     border: none;
     color: white;
+    margin: 10px;
     padding: 16px 32px;
     text-decoration: none;
     cursor: pointer;
     border-radius: 4px;
-    align-items: center;
+
 }
+
 .asteriskField {
     color: red;
 }
