@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.forms import ModelForm
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView
 from rest_framework import status
 from rest_framework.generics import ListAPIView
@@ -210,4 +211,21 @@ def create_bari(request):
 
     context['form'] = form
     return render(request, 'villagers/bari_create.html', context=context)
+
+@csrf_exempt
+def webhook(request):
+    print("in webhook")
+    pprint(request.body)
+    print('medhod: ', request.method)
+    # return 'fadf'
+
+    # print(dir(request))
+    print()
+    print()
+    # print(vars(request))
+    # print(vars(request))
+    return HttpResponse('ok')
+
+
+
 

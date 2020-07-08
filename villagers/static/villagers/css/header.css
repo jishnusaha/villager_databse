@@ -14,7 +14,7 @@ a {
     top: 0;
     height: 60px;
     width: 100%;
-    z-index: 0;
+    z-index: 1;
 }
 
 .header ul {
@@ -110,7 +110,7 @@ a {
 
 /* 48em = 768px */
 
-@media (min-width: 48em) {
+@media (min-width: 40em) {
     .header li {
         float: left;
     }
