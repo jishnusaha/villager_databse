@@ -1,0 +1,100 @@
+.option {
+    width: 23%;
+
+    /*border: 1px solid #ccc;*/
+    right: 0;
+    height: calc(100% - 65px);
+    /*margin-top: 1%;*/
+    margin-right: 1%;
+    text-transform: capitalize;
+    position: fixed;
+    top: inherit;
+
+    /*background-color: #f8f8f8;*/
+    overflow-y:auto;
+    overflow-x:hidden;
+
+
+}
+.option > div {
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+}
+.option > div > div{
+    border-bottom: 1px solid #eaeaea;
+}
+
+.option h2{
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 5px 15px;
+    margin-bottom: 12px;
+    border-bottom: none;
+    background: #79aec8;
+    color: #fff;
+    margin-top: 0;
+}
+.option h3 {
+    font-weight: 400;
+    font-size: 14px;
+    padding: 0 15px;
+    margin-bottom: 10px;
+
+}
+.option ul {
+    margin: 5px 0;
+    padding-left: 15px ;
+
+
+}
+.option li {
+    list-style-type: none;
+    margin: 5px 0 0 0;
+    padding-left: 0;
+
+}
+.option li.selected {
+    border-left: 5px solid #989898;
+    /*background-color: #989898;*/
+    /*color: #fff;*/
+    padding-left: 10px;
+    margin-left: -15px;
+
+}
+.option a {
+    display: block;
+    color: #999;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    text-decoration: none;
+}
+a:hover, .option li.selected a:focus, .option li.selected a:hover {
+    color: #036;
+}
+
+.option input {
+    width: 90%;
+    /*padding: 5px 0;*/
+    /*margin: ;*/
+    box-sizing: border-box;
+    border: 1px solid #b6d5f6;
+    border-radius: 4px;
+    /*text-align: center;*/
+    background: rgb(232,240,254);
+}
+
+
+
+@media screen and (max-width: 750px) {
+    .option{
+        width: 98%;
+        top: 60px;
+        margin-left: 1%;
+        margin-right: 1%;
+        position: sticky;
+
+        /*position: absolute;*/
+    }
+
+}

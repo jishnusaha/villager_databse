@@ -19,6 +19,7 @@ from pprint import pprint
 
 
 def index(request):
+    
     bari = request.GET.get('bari')
     lives_in_village = request.GET.get('lives_in_village')
     # print('bari: ', bari)
@@ -211,6 +212,37 @@ def create_bari(request):
 
     context['form'] = form
     return render(request, 'villagers/bari_create.html', context=context)
+
+
+def error_404(request, *args, **kwargs):
+    data = {}
+    response = render(request, 'villagers/404.html', data)
+    response.status_code = 404
+    return response
+
+def error_400(request, exception):
+    data = {}
+    response = render(request, 'villagers/400.html', data)
+    response.status_code = 400
+    return response
+
+
+def error_403(request, exception):
+    data = {}
+    response = render(request, 'villagers/403.html', data)
+    response.status_code = 403
+    return response
+
+
+def error_500(request, *args, **argv):
+    data = {}
+    response = render(request, 'villagers/500.html', data)
+    response.status_code = 500
+    return response
+
+
+
+
 
 @csrf_exempt
 def webhook(request):

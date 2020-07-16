@@ -1,0 +1,41 @@
+.login-box {
+    border: 1px solid #ccc;
+    width: 60%;
+    margin: auto;
+    text-align: center;
+    padding: 0 5% 5% 5%;
+}
+input {
+  width: 100%;
+  padding: 12px 2%;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #b6d5f6;;
+    border-radius: 4px;
+    text-align: center;
+    background: rgb(232,240,254);
+      -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+input:focus {
+  border: 3px solid #b6d4ff;
+}
+
+button[type=button], button[type=submit], input[type=reset] {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.asteriskField {
+    color: red;
+}
+.hidden {
+    display: none;
+}
