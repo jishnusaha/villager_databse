@@ -19,7 +19,7 @@ from pprint import pprint
 
 
 def index(request):
-    
+
     bari = request.GET.get('bari')
     lives_in_village = request.GET.get('lives_in_village')
     # print('bari: ', bari)
