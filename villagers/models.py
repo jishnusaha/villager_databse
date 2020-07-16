@@ -32,7 +32,7 @@ class Villager(models.Model):
     grand_mother = models.ForeignKey('self', on_delete=models.SET_DEFAULT, default=None, blank=True, null=True,
                                      related_name="grand_mother_name")
 
-    highest_education = models.CharField(max_length=20, blank=True, null=True)
+    highest_education = models.CharField(max_length=200, blank=True, null=True)
     highest_education_institute = models.CharField(max_length=100, blank=True, null=True)
     occupation = models.CharField(max_length=100, blank=True, null=True, help_text='পেশা')
     marital_status_option = (
